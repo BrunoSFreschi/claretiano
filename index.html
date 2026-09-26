@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aprender e Construir — Bruno</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body { 
+      height: 100%; 
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(28px);
+      transition:
+        opacity 350ms ease,
+        transform 350ms ease,
+        visibility 350ms ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .progress-bar {
+      transition: width 350ms ease;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .active .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .active .delay-1 { transition-delay: 80ms; }
+    .active .delay-2 { transition-delay: 160ms; }
+    .active .delay-3 { transition-delay: 240ms; }
+    .active .delay-4 { transition-delay: 320ms; }
+
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { scrollbar-width: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .reveal, .progress-bar {
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-white font-sans selection:bg-white selection:text-slate-950">
+
+  <!-- Apresentação Principal -->
+  <main id="presentation" class="relative h-screen w-screen overflow-hidden" role="region" aria-label="Apresentação de Slides">
+
+    <!-- Slide 0: Capa -->
+    <section class="slide active" data-slide="0" aria-roledescription="slide" aria-label="1 de 10">
+      <div class="h-full w-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <div class="reveal delay-1 mb-8 flex items-center gap-3">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <span class="text-sm uppercase tracking-[0.3em] text-slate-400">Palestra</span>
+          </div>
+
+          <h1 class="reveal delay-2 text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.95]">
+            Aprender e construir
+          </h1>
+
+          <p class="reveal delay-3 mt-8 text-xl md:text-3xl text-slate-300 font-light max-w-3xl leading-relaxed">
+            Um papo sobre aprendizado e construção com tecnologia.
+          </p>
+
+          <div class="reveal delay-4 mt-16 pt-8 border-t border-slate-800/80 flex items-center justify-between max-w-2xl">
+            <div>
+              <p class="text-xs uppercase tracking-widest text-slate-500">Apresentado por</p>
+              <p class="text-xl md:text-2xl font-semibold text-white mt-1">Bruno</p>
+            </div>
+            <span class="text-sm text-slate-500 tracking-wider">2026</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 1 -->
+    <section class="slide" data-slide="1" aria-roledescription="slide" aria-label="2 de 10">
+      <div class="h-full w-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <div class="reveal delay-1 mb-8">
+            <span class="text-sm uppercase tracking-[0.3em] text-slate-400">01 · Transição</span>
+          </div>
+
+          <h2 class="reveal delay-2 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] max-w-5xl">
+            Aprender e construir
+          </h2>
+
+          <div class="reveal delay-4 mt-14 grid md:grid-cols-2 gap-6 max-w-4xl">
+            <div class="border border-slate-700 rounded-2xl p-7 bg-slate-900/60">
+              <p class="text-sm uppercase tracking-widest text-slate-500 mb-4">Universidade</p>
+              <p class="text-2xl md:text-3xl font-semibold">Explorar · Experimentar · Construir base</p>
+            </div>
+            <div class="border border-slate-700 rounded-2xl p-7 bg-white text-slate-950">
+              <p class="text-sm uppercase tracking-widest text-slate-500 mb-4">Mercado</p>
+              <p class="text-2xl md:text-3xl font-semibold">Resolver problemas · Gerar valor</p>
+            </div>
+          </div>
+
+          <p class="reveal delay-4 mt-10 text-lg text-slate-400">
+            Onde você está hoje?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide" data-slide="2" aria-roledescription="slide" aria-label="3 de 10">
+      <div class="h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <span class="reveal delay-1 text-sm uppercase tracking-[0.3em] text-slate-400">02 · Mudança</span>
+          <h2 class="reveal delay-2 mt-5 text-5xl md:text-7xl font-bold tracking-tight">
+            A métrica muda.
+          </h2>
+
+          <div class="reveal delay-3 mt-14 grid md:grid-cols-2 gap-8 max-w-5xl">
+            <div class="rounded-3xl bg-slate-900 border border-slate-800 p-8 md:p-10">
+              <span class="text-sm uppercase tracking-widest text-slate-500">Universidade</span>
+              <p class="mt-6 text-3xl md:text-4xl font-semibold">“Preciso aprender.”</p>
+            </div>
+            <div class="rounded-3xl bg-white text-slate-950 p-8 md:p-10">
+              <span class="text-sm uppercase tracking-widest text-slate-500">Mercado</span>
+              <p class="mt-6 text-3xl md:text-4xl font-semibold">“Como resolvo?”</p>
+            </div>
+          </div>
+
+          <!-- <p class="reveal delay-4 mt-10 text-lg md:text-xl text-slate-300 max-w-3xl">
+            Você continua aprendendo. A diferença é que agora o aprendizado acontece dentro de prazos.
+          </p> 2 -->
+
+          <p class="reveal delay-4 mt-6 text-slate-400 font-medium">
+            Extraia aprendizado dos problemas diários.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide" data-slide="3" aria-roledescription="slide" aria-label="4 de 10">
+      <div class="h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <span class="reveal delay-1 text-sm uppercase tracking-[0.3em] text-slate-400">03 · Início de carreira</span>
+          <h2 class="reveal delay-2 mt-5 text-5xl md:text-7xl font-bold tracking-tight">
+            O que é esperado.
+          </h2>
+
+          <div class="reveal delay-3 mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <article class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <div class="text-3xl font-bold mb-8 text-slate-500">01</div>
+              <h3 class="text-xl font-semibold">Curiosidade</h3>
+            </article>
+            <article class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <div class="text-3xl font-bold mb-8 text-slate-500">02</div>
+              <h3 class="text-xl font-semibold">Autonomia</h3>
+            </article>
+            <article class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <div class="text-3xl font-bold mb-8 text-slate-500">03</div>
+              <h3 class="text-xl font-semibold">Comunicação</h3>
+            </article>
+            <article class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <div class="text-3xl font-bold mb-8 text-slate-500">04</div>
+              <h3 class="text-xl font-semibold">Maturidade</h3>
+            </article>
+          </div>
+
+          <p class="reveal delay-4 mt-10 text-xl md:text-2xl text-slate-300">
+            Você ainda está construindo repertório.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide" data-slide="4" aria-roledescription="slide" aria-label="5 de 10">
+      <div class="h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <span class="reveal delay-1 text-sm uppercase tracking-[0.3em] text-slate-400">04 · Autonomia</span>
+          <h2 class="reveal delay-2 mt-5 text-5xl md:text-7xl font-bold tracking-tight">
+            Não fique travado<br />em silêncio.
+          </h2>
+
+          <div class="reveal delay-3 mt-12 flex flex-col md:flex-row items-stretch md:items-center gap-3 max-w-5xl">
+            <div class="flex-1 p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center">
+              <span class="block text-xs uppercase tracking-widest text-slate-500">01</span>
+              <strong class="block mt-2 text-xl font-semibold">Tente</strong>
+            </div>
+            <span class="hidden md:block text-slate-600 text-2xl" aria-hidden="true">→</span>
+            <div class="flex-1 p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center">
+              <span class="block text-xs uppercase tracking-widest text-slate-500">02</span>
+              <strong class="block mt-2 text-xl font-semibold">Pesquise</strong>
+            </div>
+            <span class="hidden md:block text-slate-600 text-2xl" aria-hidden="true">→</span>
+            <div class="flex-1 p-6 rounded-2xl bg-slate-900 border border-slate-800 text-center">
+              <span class="block text-xs uppercase tracking-widest text-slate-500">03</span>
+              <strong class="block mt-2 text-xl font-semibold">Timebox</strong>
+            </div>
+            <span class="hidden md:block text-slate-600 text-2xl" aria-hidden="true">→</span>
+            <div class="flex-1 p-6 rounded-2xl bg-white text-slate-950 text-center">
+              <span class="block text-xs uppercase tracking-widest text-slate-500">04</span>
+              <strong class="block mt-2 text-xl font-semibold">Peça ajuda</strong>
+            </div>
+          </div>
+
+          <p class="reveal delay-4 mt-7 text-lg text-slate-400">
+            Pedir ajuda é parte do trabalho.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide" data-slide="5" aria-roledescription="slide" aria-label="6 de 10">
+      <div class="h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <span class="reveal delay-1 text-sm uppercase tracking-[0.3em] text-slate-400">05 · Carreira</span>
+          <h2 class="reveal delay-2 mt-5 text-5xl md:text-7xl font-bold tracking-tight">
+            O jogo não termina<br />quando você consegue o emprego.
+          </h2>
+
+          <div class="reveal delay-3 mt-12 grid md:grid-cols-3 gap-5 max-w-5xl">
+            <div class="rounded-2xl border border-slate-800 p-7">
+              <p class="text-sm uppercase tracking-widest text-slate-500">Filtre</p>
+              <p class="mt-4 text-2xl font-semibold">Fontes de qualidade.</p>
+            </div>
+            <div class="rounded-2xl border border-slate-800 p-7">
+              <p class="text-sm uppercase tracking-widest text-slate-500">Seja constante</p>
+              <p class="mt-4 text-2xl font-semibold">20 min/dia</p>
+            </div>
+            <div class="rounded-2xl border border-slate-800 p-7">
+              <p class="text-sm uppercase tracking-widest text-slate-500">Pratique</p>
+              <p class="mt-4 text-2xl font-semibold">Aprenda → Construa → Explique.</p>
+            </div>
+          </div>
+
+          <div class="reveal delay-4 mt-12">
+            <p class="text-xl md:text-2xl text-slate-400">Tecnologia muda. Aprendizado continua.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide" data-slide="6" aria-roledescription="slide" aria-label="7 de 10">
+      <div class="h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <span class="reveal delay-1 text-sm uppercase tracking-[0.3em] text-slate-400">06 · Foco</span>
+          <h2 class="reveal delay-2 mt-5 text-5xl md:text-7xl font-bold tracking-tight">
+            Excesso cognitivo.
+          </h2>
+
+          <div class="reveal delay-3 mt-12 flex flex-wrap gap-3 max-w-4xl">
+            <span class="px-5 py-3 rounded-full bg-slate-900 border border-slate-800 text-lg">Nova linguagem</span>
+            <span class="px-5 py-3 rounded-full bg-slate-900 border border-slate-800 text-lg">Novo framework</span>
+            <span class="px-5 py-3 rounded-full bg-slate-900 border border-slate-800 text-lg">Nova ferramenta</span>
+            <span class="px-5 py-3 rounded-full bg-slate-900 border border-slate-800 text-lg">Nova tendência</span>
+          </div>
+
+          <div class="reveal delay-4 mt-12 border-l-2 border-white pl-6 max-w-3xl">
+            <p class="text-2xl md:text-3xl font-semibold">Escolha 2–3 fontes confiáveis.</p>
+          </div>
+
+          <p class="reveal delay-4 mt-8 text-lg text-slate-400">
+            Você não precisa acompanhar tudo. Informação demais também atrapalha o aprendizado.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7 -->
+    <section class="slide" data-slide="7" aria-roledescription="slide" aria-label="8 de 10">
+      <div class="h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <span class="reveal delay-1 text-sm uppercase tracking-[0.3em] text-slate-400">07 · Inteligência artificial</span>
+          <h2 class="reveal delay-2 mt-5 text-5xl md:text-7xl font-bold tracking-tight">
+            IA: mentora de bolso.
+          </h2>
+
+          <div class="reveal delay-4 mt-12 grid sm:grid-cols-2 gap-4 max-w-5xl">
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <span class="text-xs uppercase tracking-widest text-slate-500">Explique</span>
+              <p class="mt-3 text-lg">“Explique esse conceito usando uma analogia.”</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <span class="text-xs uppercase tracking-widest text-slate-500">Simule</span>
+              <p class="mt-3 text-lg">“Faça uma entrevista técnica comigo.”</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+              <span class="text-xs uppercase tracking-widest text-slate-500">Critique</span>
+              <p class="mt-3 text-lg">“Revise meu código como um desenvolvedor sênior.”</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-white text-slate-950">
+              <span class="text-xs uppercase tracking-widest text-slate-500">Desbloqueie</span>
+              <p class="mt-3 text-lg">“Não entendi esta documentação. Explique de forma simples.”</p>
+            </div>
+          </div>
+
+          <p class="reveal delay-4 mt-8 text-xl font-semibold">
+            Use IA para acelerar seu aprendizado.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8 -->
+    <section class="slide" data-slide="8" aria-roledescription="slide" aria-label="9 de 10">
+      <div class="h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
+        <div class="max-w-6xl mx-auto w-full">
+          <span class="reveal delay-1 text-sm uppercase tracking-[0.3em] text-slate-400">08 · A regra</span>
+          <h2 class="reveal delay-2 mt-5 text-5xl md:text-7xl font-bold tracking-tight">
+            IA deve acelerar.<br />
+            <span class="text-slate-400">Não substituir.</span>
+          </h2>
+
+          <div class="reveal delay-3 mt-14 grid md:grid-cols-2 gap-6 max-w-5xl">
+            <div class="rounded-3xl border border-slate-800 bg-slate-900 p-8 md:p-10">
+              <p class="text-sm uppercase tracking-widest text-slate-500">Atalho</p>
+              <p class="mt-5 text-3xl font-bold">Copiar → Colar → Entregar</p>
+              <p class="mt-5 text-slate-400 text-lg">Você entrega. Mas não aprende.</p>
+            </div>
+            <div class="rounded-3xl bg-white text-slate-950 p-8 md:p-10">
+              <p class="text-sm uppercase tracking-widest text-slate-500">Aprendizado</p>
+              <p class="mt-5 text-3xl font-bold">Entender → Experimentar → Construir</p>
+              <p class="mt-5 text-slate-600 text-lg">Você aprende.</p>
+            </div>
+          </div>
+
+          <div class="reveal delay-4 mt-12">
+            <p class="text-xl md:text-2xl text-slate-400">Use a IA para chegar. Não só para entregar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9 (Final) -->
+    <section class="slide" data-slide="9" aria-roledescription="slide" aria-label="10 de 10">
+      <div class="h-full flex flex-col justify-center items-center text-center px-8">
+        <div class="max-w-5xl">
+          <span class="reveal delay-1 text-sm uppercase tracking-[0.3em] text-slate-500">Conclusão</span>
+
+          <div class="reveal delay-2 mt-10 text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[0.9]">
+            <p>Aprenda.</p>
+            <p class="text-slate-400">Aplique.</p>
+            <p>Continue.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Control HUD -->
+  <footer class="fixed bottom-0 left-0 right-0 z-50">
+    <div class="h-1 bg-slate-800" role="progressbar" id="progress-container" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1">
+      <div id="progress" class="progress-bar h-full bg-white" style="width: 10%"></div>
+    </div>
+
+    <div class="px-5 md:px-8 py-4 flex items-center justify-between bg-slate-950/80 backdrop-blur">
+      <button id="prev"
+        class="px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400 transition disabled:opacity-30 disabled:pointer-events-none"
+        aria-label="Slide anterior">
+        ←
+      </button>
+
+      <div class="flex items-center gap-4">
+        <span id="counter" class="text-sm text-slate-500" aria-live="polite">01 / 10</span>
+        <button id="fullscreen"
+          class="px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400 transition"
+          aria-label="Alternar tela cheia"
+          aria-expanded="false">
+          Tela cheia
+        </button>
+      </div>
+
+      <button id="next"
+        class="px-4 py-2 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:border-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-400 transition disabled:opacity-30 disabled:pointer-events-none"
+        aria-label="Próximo slide">
+        →
+      </button>
+    </div>
+  </footer>
+
+  <!-- Help Overlay -->
+  <aside id="help" class="fixed top-5 right-5 z-50 text-xs text-slate-600 hidden md:block" aria-hidden="true">
+    ← → navegar · F tela cheia · Esc sair
+  </aside>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const slides = [...document.querySelectorAll(".slide")];
+      const prevButton = document.getElementById("prev");
+      const nextButton = document.getElementById("next");
+      const counter = document.getElementById("counter");
+      const progress = document.getElementById("progress");
+      const progressContainer = document.getElementById("progress-container");
+      const fullscreenButton = document.getElementById("fullscreen");
+
+      let current = 0;
+
+      function renderSlide(index) {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+
+        slides.forEach((slide, i) => {
+          const isActive = i === current;
+          slide.classList.toggle("active", isActive);
+          slide.setAttribute("aria-hidden", !isActive);
+        });
+
+        const formattedCurrent = String(current + 1).padStart(2, "0");
+        const formattedTotal = String(slides.length).padStart(2, "0");
+        
+        counter.textContent = `${formattedCurrent} / ${formattedTotal}`;
+
+        const percentage = ((current + 1) / slides.length) * 100;
+        progress.style.width = `${percentage}%`;
+        progressContainer.setAttribute("aria-valuenow", current + 1);
+
+        prevButton.disabled = current === 0;
+        nextButton.disabled = current === slides.length - 1;
+
+        if (location.hash !== `#${current + 1}`) {
+          history.replaceState(null, "", `#${current + 1}`);
+        }
+      }
+
+      function next() {
+        if (current < slides.length - 1) renderSlide(current + 1);
+      }
+
+      function prev() {
+        if (current > 0) renderSlide(current - 1);
+      }
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen?.().catch(() => {});
+        } else {
+          document.exitFullscreen?.().catch(() => {});
+        }
+      }
+
+      nextButton.addEventListener("click", next);
+      prevButton.addEventListener("click", prev);
+      fullscreenButton.addEventListener("click", toggleFullscreen);
+
+      document.addEventListener("keydown", (event) => {
+        if (["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) {
+          return;
+        }
+
+        switch (event.key) {
+          case "ArrowRight":
+          case "PageDown":
+          case " ":
+            event.preventDefault();
+            next();
+            break;
+          case "ArrowLeft":
+          case "PageUp":
+            event.preventDefault();
+            prev();
+            break;
+          case "f":
+          case "F":
+            event.preventDefault();
+            toggleFullscreen();
+            break;
+          case "Home":
+            event.preventDefault();
+            renderSlide(0);
+            break;
+          case "End":
+            event.preventDefault();
+            renderSlide(slides.length - 1);
+            break;
+        }
+      });
+
+      // Suporte a Touch / Swipe
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      document.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0].screenX;
+        touchStartY = event.changedTouches[0].screenY;
+      }, { passive: true });
+
+      document.addEventListener("touchend", (event) => {
+        const touchEndX = event.changedTouches[0].screenX;
+        const touchEndY = event.changedTouches[0].screenY;
+        
+        const distanceX = touchEndX - touchStartX;
+        const distanceY = touchEndY - touchStartY;
+
+        if (Math.abs(distanceX) > Math.abs(distanceY) && Math.abs(distanceX) > 50) {
+          if (distanceX < 0) next();
+          else prev();
+        }
+      }, { passive: true });
+
+      // Navegação por Hash na URL
+      function syncSlideFromHash() {
+        const hash = Number(location.hash.replace("#", ""));
+        if (hash >= 1 && hash <= slides.length) {
+          renderSlide(hash - 1);
+        } else {
+          renderSlide(0);
+        }
+      }
+
+      window.addEventListener("hashchange", syncSlideFromHash);
+
+      document.addEventListener("fullscreenchange", () => {
+        const isFullscreen = !!document.fullscreenElement;
+        fullscreenButton.textContent = isFullscreen ? "Sair da tela cheia" : "Tela cheia";
+        fullscreenButton.setAttribute("aria-expanded", isFullscreen);
+      });
+
+      // Inicialização
+      syncSlideFromHash();
+    });
+  </script>
+</body>
+</html>
